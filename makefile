@@ -1,15 +1,25 @@
 CC=gcc
 NAME=main
+FLAGS= -ansi
 
-main: main.o
-	$(CC) -o $(NAME) main.o
+main: main.o byteReader.o
+	$(CC) -o $(NAME) main.o byteReader.o
 	rm *.o
 
 main.o:
-	$(CC) -c main.c
+	$(CC) $(FLAGS) -c main.c
+
+byteReader.o:
+	$(CC) $(FLAGS) -c byteReader.c
 
 clean:
 	rm *.o $(NAME)
 
-test:
-	valgrind ./$(NAME) pruebas.png
+test1:
+	valgrind ./$(NAME) test1.test
+
+test2:
+	valgrind ./$(NAME) test2.test
+
+test3:
+	valgrind ./$(NAME) test3.test
