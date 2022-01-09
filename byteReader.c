@@ -65,21 +65,28 @@ void printByteFile(ByteFile* file){
         line[0] = '\0';
         sprintf(line, "%010x     ", i);
         for(j = 0; j < HEX; j++){
-            sprintf(byte, "%02x ", file->buffer[i+j]);
+            if (i+j < file->size){
+                sprintf(byte, "%02x ", file->buffer[i+j]);
+            } else {
+                sprintf(byte, "   ");
+            }
             strcat(line, byte);
         }
         
         strcat(line, "    ");
         for(j = 0; j < HEX; j++){
-            aux = file->buffer[i+j];
-            if (aux > BOTTOM && aux < TOP){
-                sprintf(byte, "%c", aux);
+            if (i+j < file->size){
+                aux = file->buffer[i+j];
+                if (aux > BOTTOM && aux < TOP){
+                    sprintf(byte, "%c", aux);
+                } else {
+                    sprintf(byte, ".");
+                }
             } else {
-                sprintf(byte, ".");
+                sprintf(byte, " ");
             }
             strcat(line, byte);
         }
-
         printf("%s\n", line);
     }
     free(line);

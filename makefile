@@ -1,5 +1,5 @@
 CC=gcc
-NAME=main
+NAME=bv
 FLAGS= -ansi
 
 main: main.o byteReader.o
@@ -12,9 +12,6 @@ main.o:
 byteReader.o:
 	$(CC) $(FLAGS) -c byteReader.c
 
-clean:
-	rm *.o $(NAME)
-
 test1:
 	valgrind ./$(NAME) test1.test
 
@@ -23,3 +20,6 @@ test2:
 
 test3:
 	valgrind ./$(NAME) test3.test
+
+install:
+	sudo cp $(NAME) /usr/bin/
